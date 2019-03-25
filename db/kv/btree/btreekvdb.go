@@ -47,7 +47,7 @@ func (db *BTreeKVDB) OpenDB(basedir string, dbname string) error {
 
 	db.mfspath = "/" + basedir + "/" + dbname
 
-	bs, err := AUtils.AFMS_ReadFile(basedir, dbname, 0, 0)
+	bs, err := AUtils.AFMS_ReadFile(db.mfspath, 0, 0)
 
 	if err != nil {
 		return errors.New("BTreeKVDB Error:OpenDB Readfiles faild.")
@@ -68,9 +68,7 @@ func (db *BTreeKVDB) CreateDB(basedir string, dbname string) error {
 		return errors.New("BTreeKVDB Error:MFSPath are already exist.")
 	}
 
-
-
-	return AUtils.AFMS_CreateFile(basedir, dbname, nil)
+	return AUtils.AFMS_CreateFile(db.mfspath, nil)
 }
 
 func (db *BTreeKVDB) CloseDB() bool {
